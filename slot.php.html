@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Wash Booking</title>
+    
+    <style>
+        /* styles.css */
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.time-slots {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.time-box {
+    flex: 1;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+
+.time-box h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #333;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.service-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.booking-section {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+.service-btn {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color:black;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.service-btn img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.service-btn:hover {
+    background-color:grey;
+}
+label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .time-box {
+            flex: 1;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            padding: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .time-box:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-box h3 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .time-slot {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px;
+            cursor: pointer;
+            display: inline-block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .time-slot:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pay {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pay:hover {
+            background-color: #555;
+        }
+
+
+
+
+.date-selection {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+/* Add this CSS to indicate selected service button */
+/* Add this CSS to indicate selected service button */
+.service-btn.selected {
+    background-color:green !important; /* Add !important to override default behavior */
+    border: 2px solid green !important; /* Add !important to override default behavior */
+}
+.time-slot {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .time-slot.selected {
+            background-color: green;
+            color: #fff;
+        }
+        .disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        .service-btn {
+    /* Your existing styles */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition for background color and transform */
+}
+
+.service-btn:hover {
+    background-color: grey;
+    transform: scale(1.05); /* Increase button size on hover */
+}
+button[type="submit"] {
+    /* Your existing styles */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition for background color and transform */
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+    transform: scale(1.05); /* Increase button size on hover */
+}
+.time-slot {
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for background color and text color */
+}
+.time-slot:hover {
+    background-color: #f0f0f0;
+    color: #333; /* Change text color on hover */
+    transition: background-color 0.3s ease;
+}
+.booking-section{
+    background-image: url('banner5.jpg');
+}
+
+.logo {
+    float: left;
+    margin-right: 100px; /* Adjusted margin for closer positioning to the top left corner */
+    margin-top: -50px; /* Adjusted margin for closer positioning to the top left corner */
+}
+
+nav {
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav ul li a:hover {
+    color: #ffc107;
+}
+
+.user-menu {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.user-icon {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 120px;
+    z-index: 1;
+    border-radius: 5px;
+    top: 40px;
+    right: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-content a {
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+}
+
+.user-menu:hover .dropdown-content {
+    display: block;
+}
+.footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    /* Use fixed positioning */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.time-slot {
+    /* Your existing styles */
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.booked {
+    background-color: #ccc; /* Grey background for booked slots */
+    color: #888; /* Dark grey text color */
+    cursor: not-allowed; /* Change cursor for disabled slots */
+}
+
+.available {
+    /* Define styles for available slots */
+}
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="logo1.png" alt="AutoSpa Logo" class="logo" style="position: relative; right: 10px; down:10px;"> <!-- Added class="logo" to the logo image -->
+            <nav>
+                <ul>
+                    <li><a href="car2.html">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <img src="user1.png" alt="User Icon" class="user-icon">
+                <div class="dropdown-content">
+                    <a href="login.php">Login</a>
+                    <a href="reg.html">Sign Up</a>
+                    <a href="profile.php">Profile</a>
+                    <a href="logout.php">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <?php
+// Debugging
+var_dump($_POST);
+
+// Establish database connection
+$servername = "localhost";
+$username = "abel96";
+$password = "123456789";
+$database = "user_info";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+$center_id = "your_center_id"; // You need to set the center_id dynamically based on your application logic
+$query = "SELECT facility1, facility2, facility3, facility4 FROM your_table_name WHERE center_id = '$center_id'";
+$result = mysqli_query($connection, $query);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $facility1 = $row['facility1'];
+    $facility2 = $row['facility2'];
+    $facility3 = $row['facility3'];
+    $facility4 = $row['facility4'];
+}
+?>
+        <section class="booking-section">
+            <?php
+// Debugging
+var_dump($_POST);
+
+// Establish database connection
+$servername = "localhost";
+$username = "abel96";
+$password = "123456789";
+$database = "user_info";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+$center_id = "your_center_id"; // You need to set the center_id dynamically based on your application logic
+$query = "SELECT facility1, facility2, facility3, facility4 FROM your_table_name WHERE center_id = '$center_id'";
+$result = mysqli_query($connection, $query);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $facility1 = $row['facility1'];
+    $facility2 = $row['facility2'];
+    $facility3 = $row['facility3'];
+    $facility4 = $row['facility4'];
+}
+?>
+            <h1>Book a Car Wash</h1>
+            <form id="booking-form" action="slott.php" method="POST">
+
+                
+                <label for="service">Select Service:</label>
+                <label for="service">Select Service:</label>
+        <div class="service-container">
+            <button class="service-btn" id="exterior" name="service" value="<?php echo $facility1; ?>">
+                <img src="exterior.jpg" alt="Exterior Wash">
+                <?php echo $facility1; ?>
+            </button>
+            <button class="service-btn" id="interior" name="service" value="<?php echo $facility2; ?>">
+                <img src="interior.jpeg" alt="Interior Wash">
+                <?php echo $facility2; ?>
+            </button>
+            <button class="service-btn" id="oil-change" name="service" value="<?php echo $facility3; ?>">
+                <img src="oil change.jpg" alt="Oil Change">
+                <?php echo $facility3; ?>
+            </button>
+            <button class="service-btn" id="engine-cleaning" name="service" value="<?php echo $facility4; ?>">
+                <img src="engine-cleaning.jpeg" alt="Engine Cleaning">
+                <?php echo $facility4; ?>
+            </button>
+        </div>
+                
+                <label for="date" id="date-label" class="disabled">Select Date:</label>
+                <input type="date" id="date" name="date" class="disabled"  required>
+
+                <label for="time" id="time-label" class="disabled">Select Time Slot:</label>
+                <div class="time-slots" id="time" name="time" class="disabled">
+                    <div class="time-box" id="morning-slots" >
+                        <h3>Morning</h3>
+                    </div>
+                    <div class="time-box" id="afternoon-slots" >
+                        <h3>Afternoon</h3>
+                    </div>
+                    <div class="time-box" id="evening-slots">
+                        <h3>Evening</h3>
+                    </div>
+                </div>
+
+                 <a href="pay.html" class="pay disabled">Pay now</a>
+            </form>
+        </section>
+        <script>
+ // Event listener for DOMContentLoaded to toggle selected class on service buttons
+document.addEventListener("DOMContentLoaded", function() {
+    // Service buttons functionality
+    const serviceButtons = document.querySelectorAll('.service-btn');
+    serviceButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Toggle 'selected' class for the clicked button
+            serviceButtons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+            enableDateInput(); // Enable date input when a service is selected
+            checkFormCompletion(); // Check form completion
+        });
+    });
+
+    // Generate time slots for different time periods
+    const morningSlots = document.getElementById('morning-slots');
+    const afternoonSlots = document.getElementById('afternoon-slots');
+    const eveningSlots = document.getElementById('evening-slots');
+
+    generateTimeSlots(morningSlots, 8, 30, 11, 30, 30);
+    generateTimeSlots(afternoonSlots, 12, 0, 13, 30, 30);
+    generateTimeSlots(eveningSlots, 14, 0, 20, 30, 30);
+
+    // Time slot functionality
+    const timeSlots = document.querySelectorAll('.time-slot');
+    timeSlots.forEach(slot => {
+        slot.addEventListener('click', function() {
+            // Remove 'selected' class from all time slots
+            timeSlots.forEach(slot => slot.classList.remove('selected'));
+            // Add 'selected' class to the clicked time slot
+            slot.classList.add('selected');
+            checkFormCompletion(); // Check form completion
+        });
+    });
+});
+
+// Function to enable date input when a service is selected
+function enableDateInput() {
+    const dateInput = document.getElementById('date');
+    dateInput.classList.remove('disabled');
+    document.getElementById('date-label').classList.remove('disabled');
+}
+
+// Function to check if all required fields are filled
+function checkFormCompletion() {
+    const selectedService = document.querySelector('.service-btn.selected');
+    const dateInput = document.getElementById('date');
+    const selectedTimeSlot = document.querySelector('.time-slot.selected');
+    const submitButton = document.querySelector('.pay');
+
+    if (selectedService && dateInput.value && selectedTimeSlot) {
+        submitButton.classList.remove('disabled');
+    } else {
+        submitButton.classList.add('disabled');
+    }
+}
+
+// Function to generate time slots
+function generateTimeSlots(container, startHour, startMinute, endHour, endMinute, interval) {
+    for (let hour = startHour; hour <= endHour; hour++) {
+        for (let minute = 0; minute < 60; minute += interval) {
+            if ((hour === startHour && minute < startMinute) || (hour === endHour && minute > endMinute)) {
+                continue; // Skip slots before start time and after end time
+            }
+            const time = `${hour < 10 ? '0' + hour : hour}:${minute < 10 ? '0' + minute : minute}`;
+            const slot = document.createElement('div');
+            slot.textContent = time;
+            slot.classList.add('time-slot');
+            slot.setAttribute('name', 'time'); // Set the name attribute
+            slot.setAttribute('value', time); 
+            container.appendChild(slot);
+        }
+    }
+}
+
+// Other JavaScript code...
+// Other JavaScript code...
+
+// Function to check if a slot is booked
+function checkIfSlotIsBooked(slotTime) {
+    // URL of your backend endpoint to retrieve booked slots data
+    const url = 'slott.php';
+
+    // Fetch booked slots data from the backend
+    return fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse response as JSON
+        })
+        .then(data => {
+            // Check if the slotTime exists in the retrieved booked slots data
+            return data.some(slot => slot.time === slotTime);
+        })
+        .catch(error => {
+            console.error('Error fetching booked slots data:', error);
+            return false; // Return false in case of an error
+        });
+}
+
+// Event listener for form submission
+document.addEventListener("DOMContentLoaded", function() {
+    const submitButton = document.querySelector('.pay');
+
+    submitButton.addEventListener('click', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Submit the form programmatically
+        document.getElementById('booking-form').submit();
+    });
+});
+
+
+// Event listener for form submission
+document.addEventListener("DOMContentLoaded", function() {
+    const submitButton = document.querySelector('.pay');
+
+    submitButton.addEventListener('click', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Get selected service, date, and time slot
+        const selectedService = document.querySelector('.service-btn.selected').id;
+        const selectedDate = document.getElementById('date').value;
+        const selectedTimeSlot = document.querySelector('.time-slot.selected').textContent;
+
+        // Add service, date, and time slot to form data
+        const formData = new FormData();
+        formData.append('service', selectedService);
+        formData.append('date', selectedDate);
+        formData.append('time', selectedTimeSlot);
+
+        // Submit the form with form data
+        fetch('slott.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // Assuming you expect a text response from the server
+        })
+        .then(data => {
+            console.log(data); // Log the response from the server
+            // Optionally, redirect or display a success message
+        })
+        .catch(error => {
+            console.error('Error submitting form:', error);
+            // Optionally, display an error message to the user
+        });
+    });
+});
+
+// Other JavaScript code...
+document.addEventListener("DOMContentLoaded", function() {
+    const timeSlots = document.querySelectorAll('.time-slot');
+    const dateInput = document.getElementById('date');
+    
+    // Disable time slots initially
+    timeSlots.forEach(slot => {
+        slot.classList.add('disabled');
+        slot.setAttribute('disabled', true);
+    });
+
+    dateInput.addEventListener('input', function() {
+        // Check if a date is selected
+        if (dateInput.value) {
+            // Enable time slots
+            timeSlots.forEach(slot => {
+                slot.classList.remove('disabled');
+                slot.removeAttribute('disabled');
+            });
+        } else {
+            // If no date is selected, disable time slots again
+            timeSlots.forEach(slot => {
+                slot.classList.add('disabled');
+                slot.setAttribute('disabled', true);
+            });
+        }
+    });
+});
+
+
+
+        </script>
+        
+    </main>
+
+   <!-- <footer>
+        <div class="container">
+            <p>&copy; 2024 AutoSpa</p>
+        </div>
+    </footer>-->
+</body>
+</html>

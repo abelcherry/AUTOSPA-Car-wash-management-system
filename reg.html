@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - car wash</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .registration-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .registration-form h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .registration-form input[type="text"],
+        .registration-form input[type="password"],
+        .registration-form input[type="email"],
+        .registration-form input[type="tel"],
+        .registration-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .registration-form button {
+            background-color: black;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .registration-form button:hover {
+            background-color: grey;
+        }
+
+        .registration-form p {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .registration-form p a {
+            color: #47ad4e;
+            text-decoration: none;
+        }
+
+        .registration-form p a:hover {
+            text-decoration: underline;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100vh; /* Cover the entire viewport height */
+            overflow: hidden; /* Hide any overflow of the image */
+            position: absolute;
+            z-index: -1; /* Ensure the banner is behind other content */
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%; /* Cover the entire container */
+            object-fit: cover; /* Ensure the image covers the container */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo1.png" style="height: 35px; width: auto;" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="car2.html">Home</a></li>
+                <li><a href="#">Facilities</a></li>
+                <li><a href="abt.html">About Us</a></li>
+                <li><a href="cus.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header> 
+    <div class="banner">
+        <img src="banner4.jpg" alt="Banner Image">
+    </div>
+    <div class="registration-form">
+        <h2>Register</h2>
+        <form action="register.php" method="post" id="registrationForm">
+            <input type="text" name="fullname" placeholder="Full Name" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+            <input type="tel" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+            <input type="password" name="password" placeholder="Password" required minlength="8" maxlength="15">
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.php">Login here</a></p>
+    </div>
+    <script>
+        document.getElementById('registrationForm').onsubmit = function(event) {
+            var phoneInput = document.getElementsByName('phone')[0];
+            var emailInput = document.getElementsByName('email')[0];
+            var passwordInput = document.getElementsByName('password')[0];
+            
+            // Custom validation for phone number
+            if (!phoneInput.checkValidity()) {
+                event.preventDefault();
+                phoneInput.setCustomValidity('Please enter a valid 10-digit phone number.');
+            } else {
+                phoneInput.setCustomValidity('');
+            }
+            
+            // Custom validation for email
+            if (!emailInput.checkValidity()) {
+                event.preventDefault();
+                emailInput.setCustomValidity('Please enter a valid email address.');
+            } else {
+                emailInput.setCustomValidity('');
+            }
+            
+            // Custom validation for password length
+            if (!passwordInput.checkValidity()) {
+                event.preventDefault();
+                passwordInput.setCustomValidity('Password must be between 8 and 15 characters.');
+            } else {
+                passwordInput.setCustomValidity('');
+            }
+        };
+    </script>
+</body>
+</html>

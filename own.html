@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Wash Owner Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('banner6.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .row label {
+            width: 40%; /* Adjusted width for labels */
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .row textarea,
+        .row input[type="text"] {
+            width: 50%; /* Adjusted width for text fields */
+        }
+
+        .row textarea {
+            height: 100px;
+        }
+
+        input[type="file"] {
+            width: auto;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: black;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Car Wash Owner Details</h1>
+        <form action="submit.php" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <label for="name">Name of your car wash centre:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="row">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required></textarea>
+            </div>
+            <div class="row">
+                <label for="f1">Facility 1:</label>
+                <input type="text" id="f1" name="f1" required>
+                <label for="r1">Rate of Facility 1:</label>
+                <input type="text" id="r1" name="r1">
+            </div>
+            <div class="row">
+                <label for="f2">Facility 2:</label>
+                <input type="text" id="f2" name="f2" required>
+                <label for="r2">Rate of Facility 2:</label>
+                <input type="text" id="r2" name="r2">
+            </div>
+            <div class="row">
+                <label for="f3">Facility 3:</label>
+                <input type="text" id="f3" name="f3" required>
+                <label for="r3">Rate of Facility 3:</label>
+                <input type="text" id="r3" name="r3">
+            </div>
+            <div class="row">
+                <label for="f4">Facility 4:</label>
+                <input type="text" id="f4" name="f4" required>
+                <label for="r4">Rate of Facility 4:</label>
+                <input type="text" id="r4" name="r4">
+            </div>
+            <div class="row">
+                <label for="service1">Service Detail 1:</label>
+                <textarea id="service1" name="service1" rows="3" required></textarea>
+            </div>
+            <div class="row">
+                <label for="service2">Service Detail 2:</label>
+                <textarea id="service2" name="service2" rows="3" required></textarea>
+            </div>
+            <div class="row">
+                <label for="service3">Service Detail 3:</label>
+                <textarea id="service3" name="service3" rows="3" required></textarea>
+            </div>
+            <div class="row">
+                <label for="service4">Service Detail 4:</label>
+                <textarea id="service4" name="service4" rows="3" required></textarea>
+            </div>
+            <div class="row">
+                <label for="district">District:</label>
+                <input type="text" id="district" name="district" required>
+            </div>
+            <div class="row">
+                <label for="map_location">Map Location:</label>
+                <input type="text" id="map_location" name="map_location" required>
+            </div>
+            <div class="row">
+                <label for="contact">Contact:</label>
+                <input type="text" id="contact" name="contact">
+            </div>
+            <div class="row">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="row">
+                <label for="image1">Image 1:</label>
+                <input type="file" id="image1" name="image1" accept="image/*" required>
+                <label for="image2">Image 2:</label>
+                <input type="file" id="image2" name="image2" accept="image/*" required>
+            </div>
+            <div class="row">
+                <label for="image3">Image 3:</label>
+                <input type="file" id="image3" name="image3" accept="image/*" required>
+                <label for="image4">Image 4:</label>
+                <input type="file" id="image4" name="image4" accept="image/*" required>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

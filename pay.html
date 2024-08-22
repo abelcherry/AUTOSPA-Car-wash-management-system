@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('pay.jpg');
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .pay-now-button {
+            background-color: black;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .payment-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .payment-buttons img {
+            height: 50px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .payment-buttons a {
+            display: inline-block;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .payment-buttons a:hover {
+            transform: scale(1.1);
+        }
+        .payment-buttons .selected::after {
+            content: '✔';
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: green;
+            font-size: 24px;
+            display: none; /* Initially hide the checkmark */
+        }
+        .separator {
+            width: calc(100% - 20px);
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 10px;
+            color: #8B8E98;
+            margin: 0 10px;
+        }
+        .separator > p {
+            word-break: keep-all;
+            display: block;
+            text-align: center;
+            font-weight: 600;
+            font-size: 11px;
+            margin: auto;
+        }
+        .separator .line {
+            display: inline-block;
+            width: 100%;
+            height: 1px;
+            border: 0;
+            background-color: #e8e8e8;
+            margin: auto;
+        }
+        .payment-buttons .selected {
+            background-color:green;
+            color: white;
+            border-radius: 5px;
+        }
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="payment-buttons">
+        <a href="#" onclick="togglePayment('google')" id="google-pay">
+            <img src="gpay.png" alt="Google Pay">
+        </a>
+        <a href="#" onclick="togglePayment('apple')" id="apple-pay">
+            <img src="apple.png" alt="Apple Pay">
+        </a>
+        <a href="#" onclick="togglePayment('paypal')" id="paypal-pay">
+            <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png" alt="PayPal">
+        </a>
+    </div>
+    <div class="separator">
+        <hr class="line">
+        <p>or pay using credit card</p>
+        <hr class="line">
+    </div>
+    <h2>Payment Details</h2>
+    <form id="payment-form" action="/process_payment" method="post">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="name">Cardholder Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card-number" placeholder="0000 0000 0000 0000" required>
+        </div>
+        <div class="form-group">
+            <label for="expiry">Expiration Date</label>
+            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required>
+        </div>
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" name="cvv"  placeholder="123" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" required>
+        </div>
+        <div class="form-group">
+           
+            <a href="ani1.html" class="pay-now-button disabled" id="pay-now-button">Pay now</a>
+           
+        </div>
+    </form>
+</div>
+<script>
+    // Format card number input
+    document.getElementById('card-number').addEventListener('input', function(e) {
+        var target = e.target;
+        var position = target.selectionEnd;
+        var digitCount = target.value.replace(/\D/g, '').length;
+        var formattedValue = target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+        target.value = formattedValue;
+        target.selectionEnd = position + (formattedValue.length - digitCount);
+        checkPaymentValidity();
+    });
+
+    // Format expiry date input
+    document.getElementById('expiry').addEventListener('input', function(e) {
+        var target = e.target;
+        var value = target.value.replace(/\D/g, '').replace(/(\d{2})(\d{2})/, '$1/$2').trim();
+        target.value = value.slice(0, 5);
+        checkPaymentValidity();
+    });
+    // Format CVV input
+    document.getElementById('cvv').addEventListener('input', function(e) {
+        var target = e.target;
+        target.value = target.value.replace(/\D/g, '').slice(0, 3);
+        checkPaymentValidity();
+    });
+
+    function togglePayment(method) {
+        var selectedButton = document.getElementById(method + '-pay');
+        if (selectedButton.classList.contains('selected')) {
+            // If already selected, deselect it
+            selectedButton.classList.remove('selected');
+        } else {
+            // Otherwise, select it
+            var buttons = document.querySelectorAll('.payment-buttons a');
+            buttons.forEach(function(button) {
+                button.classList.remove('selected');
+            });
+            selectedButton.classList.add('selected');
+        }
+        checkPaymentValidity();
+    }
+
+    function checkPaymentValidity() {
+        var paymentButtons = document.querySelectorAll('.payment-buttons a');
+        var cardName = document.getElementById('name').value;
+        var cardNumber = document.getElementById('card-number').value;
+        var expiry = document.getElementById('expiry').value;
+        var cvv = document.getElementById('cvv').value;
+        var amount = document.getElementById('amount').value;
+
+        var paymentSelected = false;
+
+        paymentButtons.forEach(function(button) {
+            if (button.classList.contains('selected')) {
+                paymentSelected = true;
+            }
+        });
+
+        if ((cardName && cardNumber && expiry && cvv && amount) || paymentSelected) {
+            document.getElementById('pay-now-button').classList.remove('disabled');
+        } else {
+            document.getElementById('pay-now-button').classList.add('disabled');
+        }
+    }
+</script>
+
+</body>
+</html>
