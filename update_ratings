@@ -1,0 +1,39 @@
+<?php
+// Start the session
+session_start();
+
+include 'db_connection.php';
+
+// Get the car wash center ID from the URL parameters
+if (isset($_GET['id'])) {
+    $carwashId = $_GET['id'];
+    
+    // Check if the user has already rated this car wash
+    $stmt = $conn->prepare("SELECT rating FROM ratings WHERE carwash_id = ? AND username = ?");
+    $stmt->execute([$carwashId, $_SESSION['username']]);
+    $userRating = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Display the rating form or the user's previous rating
+    if ($userRating) {
+        echo '<p>Your previous rating: ' . $userRating['rating'] . ' stars. <a href="#" id="edit-rating">Edit</a></p>';
+    } else {
+        echo '<div id="rating-form">
+                <h3>Rate this car wash:</h3>
+                <div class="rating-stars">
+                    <span class="star" data-rating="1">&#9733;</span>
+                    <span class="star" data-rating="2">&#9733;</span>
+                    <span class="star" data-rating="3">&#9733;</span>
+                    <span class="star" data-rating="4">&#9733;</span>
+                    <span class="star" data-rating="5">&#9733;</span>
+                </div>
+                <p id="selected-rating"></p>
+                <button id="submit-rating">Submit</button>
+            </div>';
+    }
+} else {
+    // If car wash center ID is not set, display a message
+    echo "<p>No car wash center ID specified</p>";
+}
+
+$conn = null;
+?>
